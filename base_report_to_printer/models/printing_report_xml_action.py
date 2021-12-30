@@ -67,9 +67,9 @@ class PrintingReportXmlAction(models.Model):
         if not action:
             return {}
         return {
-            'action': action.action,
-            'printer': action.printer_id,
-            'input_tray': action.printer_input_tray_id.system_name,
+            'action': self.action,
+            'printer': self.printer_id,
+            'input_tray': self.printer_input_tray_id.system_name,
             'output_tray': self.printer_output_tray_id.system_name
         }
 

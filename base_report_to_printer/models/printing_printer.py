@@ -32,6 +32,7 @@ class PrintingPrinter(models.Model):
     _order = 'name'
 
     name = fields.Char(required=True, index=True)
+    active = fields.Boolean(default=True)
     server_id = fields.Many2one(
         comodel_name='printing.server', string='Server', required=True,
         help='Server used to access this printer.')
@@ -178,26 +179,25 @@ class PrintingPrinter(models.Model):
     def print_file(self, file_name, report=None, **print_opts):
         """ Print a file """
         self.ensure_one()
+        title = print_opts.pop("title", file_name)
         connection = self.server_id._open_connection(raise_on_error=True)
         options = self.print_options(report=report, **print_opts)
 
         _logger.debug(
             'Sending job to CUPS printer %s on %s'
             % (self.system_name, self.server_id.address))
-        if isinstance(report, str):
-            report = self.env['ir.actions.report']._get_report_from_name(report)
-        name = f"{self.env.user.firstname or self.env.user.name[:3]} {report.name}"\
-            if report else file_name
-        connection.printFile(
-            self.system_name,
-            file_name,
-            self.env.context.get('print_name', name),
-            options=options
-        )
+        connection.printFile(self.system_name,
+                             file_name,
+                             title,
+                             options=options)
         _logger.info("Printing job: '%s' on %s" % (
             file_name,
             self.server_id.address,
         ))
+        try:
+            os.remove(file_name)
+        except OSError as exc:
+            _logger.warning("Unable to remove temporary file %s: %s", file_name, exc)
         return True
 
     @api.multi
