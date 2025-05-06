@@ -98,5 +98,6 @@ class PrintingReportXmlAction(models.Model):
                     if user_language_action:
                         action = user_language_action
             else:
-                action = self.filtered(lambda a: a.language_id.code == self.env.lang)
+                action = self.filtered(
+                    lambda a: a.language_id.code == self.env.lang and not a.user_id)
         return action
