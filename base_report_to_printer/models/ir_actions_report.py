@@ -97,8 +97,8 @@ class IrActionsReport(models.Model):
         self.ensure_one()
         printing_act_obj = self.env["printing.report.xml.action"]
 
-        result = self._get_report_default_print_behaviour()
-        result.update(self._get_user_default_print_behaviour())
+        result = self._get_user_default_print_behaviour()
+        result.update(self._get_report_default_print_behaviour())
 
         # Retrieve report-user/language specific values
         print_action = printing_act_obj.search(
