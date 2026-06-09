@@ -1,8 +1,7 @@
 # Copyright 2019 Compassion
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import types
-
-import mock
+from unittest import mock
 
 from odoo.tests.common import TransactionCase
 
@@ -107,6 +106,7 @@ class TestPrintingPrinter(TransactionCase):
             mock_ppd.findOption = lambda x: mock_option
             return "pdd_path", mock_ppd
 
-        #printer._get_cups_ppd = types.MethodType(mock__get_cups_ppd, self.printer)
-
-        printer._get_cups_ppd = types.MethodType(mock__get_cups_ppd, self.printer)
+        patcher = mock.patch.object(type(printer), '_get_cups_ppd',
+                                    side_effect=mock__get_cups_ppd)
+        patcher.start()
+        self.addCleanup(patcher.stop)
