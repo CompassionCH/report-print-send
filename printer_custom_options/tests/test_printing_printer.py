@@ -57,7 +57,7 @@ class TestPrintingPrinter(TransactionCase):
 
         self.assertEqual(options, {})
 
-    @mock.patch("%s.cups" % server_model)
+    @mock.patch(f"{server_model}.cups")
     def test_prepare_update_from_cups__load_options(self, patched_cups):
         patched_cups.Connection.return_value.getPPD3.return_value = (200, 1, None)
         self._mock_cups_options(self.printer, [])
@@ -69,7 +69,7 @@ class TestPrintingPrinter(TransactionCase):
         self.assertEqual(len(self.printer.printer_options), 1)
         self.assertEqual(self.printer.printer_options[0].option_key, "KMDuplex")
 
-    @mock.patch("%s.cups" % server_model)
+    @mock.patch(f"{server_model}.cups")
     def test_prepare_update_from_cups(self, patched_cups):
         patched_cups.Connection.return_value.getPPD3.return_value = (200, 1, None)
 

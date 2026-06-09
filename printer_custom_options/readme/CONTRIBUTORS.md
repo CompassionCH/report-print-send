@@ -1,1 +1,1 @@
-Nicolas Bornand Quentin Gigon \<<gigon.quentin@gmail.com>\>
+- Nicolas Bornand Quentin Gigon \<<gigon.quentin@gmail.com>\>
