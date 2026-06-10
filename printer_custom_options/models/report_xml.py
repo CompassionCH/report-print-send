@@ -6,9 +6,7 @@ from odoo import api, fields, models
 class IrActionsReportXml(models.Model):
     _inherit = "ir.actions.report"
 
-    printer_options = fields.Many2many(
-        "printer.option.choice", string="Printer Options"
-    )
+    printer_options = fields.Many2many("printer.option.choice")
 
     @api.onchange("printing_printer_id")
     def on_change_printer(self):
