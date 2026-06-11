@@ -29,4 +29,6 @@ class PrinterOptionChoice(models.Model):
 
     @api.model
     def build_composite_key(self, option_key, option_value):
+        if not option_key or not option_value:
+            return False
         return option_key + ":" + option_value
