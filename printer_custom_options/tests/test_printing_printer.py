@@ -80,7 +80,7 @@ class TestPrintingPrinter(TransactionCase):
             patched_cups.Connection(), self.printer_vals
         )
 
-        # OutputBin:bin1 was already inserted
+        # KMDuplex:2Sided was already inserted
         self.assertEqual(len(vals["printer_option_choices"]), 1)
         self.assertIn(
             (0, 0, {"option_key": "KMDuplex", "option_value": "1Sided"}),

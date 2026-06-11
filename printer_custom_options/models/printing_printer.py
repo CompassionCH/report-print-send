@@ -69,9 +69,9 @@ class PrintingPrinter(models.Model):
         return vals
 
     def _load_printer_option_list(self, ppd):
-        if len(self.printer_options) > 0 or not self:
-            # Only fetch options the first time or
-            # if the printer is already in the system.
+        # Only fetch options if it's the first time
+        # and the printer is already in the system.
+        if not self or self.printer_options:
             return
         option_inserts = []
         for option_group in ppd.optionGroups:
