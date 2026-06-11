@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <record model="ir.ui.view" id="printing_printer_view_form">
+    <record model="ir.ui.view" id="printing_printer_view_form_inherit">
         <field name="name">printing.printer.form</field>
         <field name="model">printing.printer</field>
         <field
