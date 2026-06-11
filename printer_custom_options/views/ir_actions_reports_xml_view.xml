@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <odoo>
-    <record model="ir.ui.view" id="act_report_xml_view">
+    <record model="ir.ui.view" id="act_report_xml_view_inherit">
         <field name="name">ir.actions.report.printing_options</field>
         <field name="model">ir.actions.report</field>
         <field name="inherit_id" ref="base.act_report_xml_view" />
